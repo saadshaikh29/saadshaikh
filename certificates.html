@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shaikh Saad - Certificates & Badges</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    .profile-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, #00ffd5, #0ff, #00e0ff);
+  color: #000;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 0 15px #00ffd5;
+  transition: all 0.3s ease;
+  z-index: 9999; /* updated from 100 to a higher value */
+}
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      margin: 0;
+      padding: 30px 20px;
+      overflow-x: hidden;
+      transition: background 0.5s ease;
+    }
+    body.light-mode {
+      background: linear-gradient(to right, #f0f0f0, #dbe9f4);
+      color: #111;
+    }
+    h1 {
+      text-align: center;
+      font-size: 3em;
+      color: #00e0ff;
+      margin-bottom: 40px;
+      text-shadow: 0 0 15px #00e0ff;
+      animation: slideInTop 1s ease-out;
+    }
+    .tab-buttons {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .tab-buttons button {
+      background: #00ffd5;
+      border: none;
+      color: #000;
+      padding: 10px 25px;
+      font-weight: bold;
+      border-radius: 8px;
+      margin: 0 10px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffd5;
+      transition: 0.3s;
+    }
+    .tab-buttons button:hover, .tab-buttons .active {
+      background: #0ff;
+      transform: scale(1.05);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1400px;
+      margin: auto;
+    }
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid #00ffd5;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 0 25px rgba(0,255,255,0.1);
+      backdrop-filter: blur(14px);
+      position: relative;
+      animation: floatCard 6s ease-in-out infinite;
+      transition: all 0.4s ease;
+    }
+    .card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 0 40px rgba(0,255,255,0.6);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 15px;
+      border: 2px solid #00ffd5;
+      transition: transform 0.4s;
+    }
+    .card img:hover {
+      transform: scale(1.05);
+    }
+    .card h3 {
+      color: #00ffd5;
+      font-size: 1.3em;
+      margin-bottom: 10px;
+    }
+    .card p {
+      font-size: 0.95em;
+      line-height: 1.6;
+    }
+    .card .desc {
+      margin-top: 8px;
+      font-size: 0.87em;
+      color: #ccc;
+    }
+    .verify-btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 8px 16px;
+      background: #00ffd5;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ffd5;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .verify-btn:hover {
+      background: #0ff;
+      transform: scale(1.1);
+    }
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.7s ease;
+    }
+    .tab-content.active {
+      display: grid;
+    }
+    .toggle-mode {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #00ffd5;
+      color: #000;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffd5;
+      z-index: 99;
+    }
+    .download-btn {
+      display: block;
+      margin: 40px auto 0;
+      background: #00ffd5;
+      color: #000;
+      padding: 12px 24px;
+      font-weight: bold;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #00ffd5;
+      transition: transform 0.3s;
+    }
+    .download-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes floatCard {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+      100% { transform: translateY(0); }
+    }
+    @keyframes slideInTop {
+      0% { transform: translateY(-60px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    @media (max-width: 768px) {
+      h1 { font-size: 2.2em; }
+      .tab-buttons button { margin: 5px 5px; }
+    }
+  </style>
+</head>
+<body>
+<a href="shaikh_saad_portfolio_complete.html" class="profile-btn">👤 Back to Profile</a>
+
+<div class="toggle-mode" onclick="toggleMode()">🌓 Toggle Mode</div>
+
+<h1>🎖 Certificates & Badges</h1>
+
+<div class="tab-buttons">
+  <button class="active" onclick="showTab('badges')">🏅 Badges</button>
+  <button onclick="showTab('certificates')">📜 Certificates</button>
+</div>
+
+<!-- Badges -->
+<div id="badges" class="tab-content active grid">
+  <div class="card">
+    <h3>Google Cybersecurity Badge</h3>
+    <p><strong>Issued:</strong> Google · Jan 2024</p>
+    <p class="desc">Credential earned after completing professional modules in network defense, threat modeling, and incident handling.</p>
+    <a class="verify-btn" href="https://www.credly.com/badges/84dd6b09-b6a6-47cb-84e9-f50b39583451" target="_blank">🔗 Verify</a>
+    <img src="badge-google.jpg" alt="Google Cybersecurity Badge">
+  </div>
+  <div class="card">
+    <h3>CCNA: Switching & Wireless</h3>
+    <p><strong>Issued:</strong> Cisco · May 2024</p>
+    <p class="desc">Focused on network protocols, VLANs, routing tables, wireless configuration, and enterprise architecture.</p>
+    <a class="verify-btn" href="https://www.credly.com/badges/c87c09f5-2fc3-43e4-bd66-543c1ed61191" target="_blank">🔗 Verify</a>
+    <img src="badge-wireless.jpg" alt="CCNA Wireless Badge">
+  </div>
+  <div class="card">
+    <h3>CyberOps Associate</h3>
+    <p><strong>Issued:</strong> Cisco · Mar 2024</p>
+    <p class="desc">Trained in cybersecurity operations center (SOC) tools, threat hunting, and digital forensics techniques.</p>
+    <a class="verify-btn" href="https://www.credly.com/badges/ad84ae2c-3a79-4905-b9ca-47c88ebf2736" target="_blank">🔗 Verify</a>
+    <img src="badge-cyberops.jpg" alt="CyberOps Associate">
+  </div>
+  <div class="card">
+    <h3>CCNA: Enterprise & Security</h3>
+    <p><strong>Issued:</strong> Cisco · Apr 2024</p>
+    <p class="desc">Advanced networking including automation, security protocols, SDN, and cloud-based infrastructure.</p>
+    <a class="verify-btn" href="https://www.credly.com/badges/47a9eab9-3e5a-425b-aac2-42ed2a561b9e" target="_blank">🔗 Verify</a>
+    <img src="badge-enterprise.jpg" alt="CCNA Enterprise">
+  </div>
+  <div class="card">
+    <h3>Ethical Hacker</h3>
+    <p><strong>Issued:</strong> Cisco · Feb 2024</p>
+    <p class="desc">Covers penetration testing, vulnerability scanning, exploits, and secure system configuration.</p>
+    <a class="verify-btn" href="https://www.credly.com/badges/8f99d2dc-7550-404f-9e23-55d517963304" target="_blank">🔗 Verify</a>
+    <img src="badge-ceh.jpg" alt="Ethical Hacker Badge">
+  </div>
+</div>
+
+<!-- Certificates -->
+<div id="certificates" class="tab-content grid">
+  <div class="card">
+    <h3>Google Cybersecurity Professional Certificate</h3>
+    <p><strong>Issued:</strong> Coursera · 2024</p>
+    <p class="desc">Covers eight foundational modules including security operations, tools, and career essentials.</p>
+    <img src="google-cybersecurity.jpg" alt="Google Cybersecurity Certificate">
+  </div>
+  <div class="card">
+    <h3>Detection and Response</h3>
+    <p><strong>Issued:</strong> Coursera · 2024</p>
+    <p class="desc">Focuses on SOC detection workflows, alert triaging, and hands-on threat response simulations.</p>
+    <img src="detection-response.jpg" alt="Detection and Response">
+  </div>
+  <div class="card">
+    <h3>Microsoft Compliance & Security</h3>
+    <p><strong>Issued:</strong> Coursera · 2024</p>
+    <p class="desc">Addresses Microsoft-based cloud security, GRC, compliance tracking, and zero-trust architecture.</p>
+    <img src="microsoft-cybersecurity.jpg" alt="Microsoft Cybersecurity">
+  </div>
+  <div class="card">
+    <h3>Certified Ethical Hacker</h3>
+    <p><strong>Issued:</strong> Cisco · Feb 2024</p>
+    <p class="desc">Hands-on training on exploiting systems, securing infrastructures, and ethical methodologies.</p>
+    <img src="ceh.jpg" alt="Certified Ethical Hacker">
+  </div>
+  <div class="card">
+    <h3>CyberOps Analyst</h3>
+    <p><strong>Issued:</strong> Cisco · Mar 2024</p>
+    <p class="desc">Demonstrates core skills for analyzing security events, logs, and automating SIEM operations.</p>
+    <img src="cyberops.jpg" alt="CyberOps Analyst">
+  </div>
+  <div class="card">
+    <h3>CCNA: Enterprise Networking</h3>
+    <p><strong>Issued:</strong> Cisco · Apr 2024</p>
+    <p class="desc">Specialized in dynamic routing, ACLs, automation tools, and enterprise-level security.</p>
+    <img src="ccna-enterprise.jpg" alt="CCNA Enterprise">
+  </div>
+  <div class="card">
+    <h3>CCNA: Routing & Wireless</h3>
+    <p><strong>Issued:</strong> Cisco · May 2024</p>
+    <p class="desc">In-depth training on network segmentation, WAN technologies, and wireless device integration.</p>
+    <img src="ccna-wireless.jpg" alt="CCNA Wireless">
+  </div>
+</div>
+
+<a class="download-btn" href="javascript:window.print()">📥 Download as PDF</a>
+
+<script>
+  function showTab(tabName) {
+    $(".tab-content").removeClass("active");
+    $("#" + tabName).addClass("active");
+    $(".tab-buttons button").removeClass("active");
+    $(".tab-buttons button").each(function() {
+      if ($(this).attr('onclick').includes(tabName)) {
+        $(this).addClass("active");
+      }
+    });
+  }
+  function toggleMode() {
+    document.body.classList.toggle("light-mode");
+  }
+</script>
+
+</body>
+</html>
