@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Infinity & Beyond | For My Queen ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --primary: #ff1e56;
+            --gold: #ffd700;
+            --dark: #050001;
+            --glass: rgba(255, 255, 255, 0.1);
+            --neon: 0 0 15px rgba(255, 30, 86, 0.6);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+        
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: var(--dark); color: #fff;
+            font-family: 'Poppins', sans-serif; overflow: hidden;
+            position: fixed;
+        }
+
+        #galaxy { position: fixed; width: 100%; height: 100%; background: radial-gradient(circle at center, #1a0206 0%, #050001 100%); z-index: -2; }
+        .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 2s infinite; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+        .hb-box { position: fixed; top: 15px; right: 15px; display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.7); padding: 8px 12px; border-radius: 30px; border: 1px solid var(--primary); z-index: 1000; font-size: 11px; box-shadow: var(--neon); }
+        .hb-heart { color: var(--primary); animation: beat 0.8s infinite; display: inline-block; }
+        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+
+        .master-container { display: flex; align-items: center; justify-content: center; width: 100%; height: 100dvh; padding: 15px; }
+        .container {
+            width: 100%; max-width: 400px; background: var(--glass); backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            padding: 30px 20px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5); text-align: center;
+            max-height: 80vh; overflow-y: auto; display: none;
+            scrollbar-width: none;
+        }
+        .container::-webkit-scrollbar { display: none; }
+        .container.active { display: block; animation: zoomIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        
+        @keyframes zoomIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+        .pass-input { background: rgba(255,255,255,0.05); border: 2px solid var(--primary); border-radius: 15px; color: white; padding: 12px; font-size: 22px; width: 100%; text-align: center; margin-bottom: 15px; letter-spacing: 5px; box-shadow: inset 0 0 10px rgba(255,30,86,0.2); }
+        
+        h1.main-title { font-family: 'Dancing Script', cursive; font-size: 38px; color: var(--gold); margin-bottom: 5px; text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.3); }
+        
+        .btn { background: linear-gradient(45deg, var(--primary), #ff4d7d); color: white; border: none; padding: 15px; border-radius: 20px; width: 100%; margin: 10px 0; font-weight: 600; font-size: 15px; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(255, 30, 86, 0.3); text-decoration: none; display: block; }
+        .btn:active { transform: scale(0.96); filter: brightness(1.1); }
+        .btn-outline { background: transparent; border: 1px solid var(--primary); color: white; }
+
+        .timeline-box { background: rgba(0,0,0,0.3); border-radius: 20px; padding: 12px; margin-bottom: 20px; border-left: 4px solid var(--primary); text-align: left; }
+        video { width: 100%; border-radius: 15px; margin-top: 10px; border: 1px solid rgba(255,255,255,0.1); }
+        
+        .timer-display { font-size: 24px; font-weight: 600; color: var(--gold); margin: 15px 0; line-height: 1.4; text-shadow: var(--neon); }
+        
+        .coupon { background: linear-gradient(135deg, #fff, #f0f0f0); color: #333; padding: 15px; border-radius: 15px; margin: 10px 0; font-weight: 600; border: 2px dashed var(--primary); }
+
+        #type-text { font-style: normal; color: #ffecec; line-height: 1.8; font-size: 15px; text-align: left; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 20px; }
+        .music-ctrl { position: fixed; bottom: 20px; left: 20px; background: var(--primary); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2000; box-shadow: var(--neon); font-size: 18px; }
+    </style>
+</head>
+<body>
+
+    <div class="hb-box"><span class="hb-heart">❤️</span> <span>My Heart: 124 BPM</span></div>
+    <div id="galaxy"></div>
+    
+    <audio id="bgMusic" loop><source src="birthday_song.mp3" type="audio/mpeg"></audio>
+    <audio id="voiceNote"><source src="my_voice.mp3" type="audio/mpeg"></audio>
+    <div class="music-ctrl" onclick="toggleMusic()">🎵</div>
+
+    <div class="master-container">
+
+        <div id="sec0" class="container active">
+            <h1 class="main-title">Hey Queen! 🔐</h1>
+            <p style="font-size: 14px; opacity: 0.8;">Enter our special date to unlock your surprise</p>
+            <input type="number" id="passcode" class="pass-input" placeholder="Hint: 1504" inputmode="numeric">
+            <button class="btn" onclick="checkPass()">Unlock Magic ✨</button>
+        </div>
+
+        <div id="sec1" class="container">
+            <h1 class="main-title">Happy Birthday!</h1>
+            <div id="cake" onclick="cutCake()" style="font-size: 90px; margin: 20px 0; cursor: pointer; filter: drop-shadow(0 0 10px orange);">🎂</div>
+            <p id="cake-msg" style="font-weight: 600;">Tap the cake to blow the candles!</p>
+            <button class="btn" id="nextToMenu" style="display:none;" onclick="showNext(2)">Enter Your Kingdom ❤️</button>
+        </div>
+
+        <div id="sec2" class="container">
+            <h1 class="main-title" style="font-size: 32px;">Treasure Hub</h1>
+            <button class="btn" onclick="playVoice()">🎙️ A Voice Note For You</button>
+            <button class="btn" onclick="showNext(3)">🎥 Memory Lane (Videos)</button>
+            <button class="btn" onclick="showNext(7)">⏳ Our Journey Tracker</button>
+            <button class="btn" onclick="showNext(4)">💌 A Secret Letter</button>
+            <button class="btn" onclick="showNext(8)">🎟️ Love Coupons</button>
+            <button class="btn btn-outline" onclick="showNext(6)">💖 The Final Question</button>
+        </div>
+
+        <div id="sec3" class="container">
+            <h1 class="main-title">Memories</h1>
+            <div class="timeline-box">
+                <div style="font-weight: 600; color: var(--gold);">Our Moments ✨</div>
+                <video controls preload="none"><source src="video1.mp4" type="video/mp4"></video>
+            </div>
+            <div class="timeline-box">
+                <div style="font-weight: 600; color: var(--gold);">Special Day 🍔</div>
+                <video controls preload="none"><source src="macd_video.mp4" type="video/mp4"></video>
+            </div>
+            <button class="btn btn-outline" onclick="showNext(2)">Back to Hub</button>
+        </div>
+
+        <div id="sec4" class="container">
+            <h1 class="main-title">From My Heart</h1>
+            <div id="type-text"></div>
+            <button class="btn btn-outline" style="margin-top:20px" onclick="showNext(2)">Back</button>
+        </div>
+
+        <div id="sec6" class="container">
+            <h1 class="main-title" style="font-size: 35px;">My Queen... 💍</h1>
+            <div id="questionArea">
+                <h2 style="color: var(--gold); font-family: 'Dancing Script';">Will you be mine forever?</h2>
+                <button class="btn" onclick="sayYes()">YES, I will! ❤️</button>
+                <button class="btn btn-outline" id="noBtn" onmouseover="moveButton(this)" onclick="moveButton(this)">No</button>
+            </div>
+            <div id="yesResponse" style="display:none">
+                <h2 style="color: var(--gold);">Luckiest Man Alive! ❤️</h2>
+                <a href="https://wa.me/923361118881?text=YES!%20I%20will%20be%20yours%20forever!%20💍❤️" class="btn">Send YES on WhatsApp! 📱</a>
+            </div>
+            <button class="btn btn-outline" style="margin-top:15px" onclick="showNext(2)">Back</button>
+        </div>
+
+        <div id="sec7" class="container">
+            <h1 class="main-title">Together Since</h1>
+            <div class="timer-display" id="loveTimer"></div>
+            <button class="btn btn-outline" onclick="showNext(2)">Back</button>
+        </div>
+
+        <div id="sec8" class="container">
+            <h1 class="main-title">Redeem Me</h1>
+            <div class="coupon">1x Romantic Dinner 🕯️</div>
+            <div class="coupon">1x Angry Mood Fixer 🍫</div>
+            <div class="coupon">Unlimited Forehead Kisses 💋</div>
+            <button class="btn btn-outline" onclick="showNext(2)">Back</button>
+        </div>
+
+    </div>
+
+    <script>
+        const bgMusic = document.getElementById('bgMusic');
+        const voiceNote = document.getElementById('voiceNote');
+
+        const galaxy = document.getElementById('galaxy');
+        for (let i = 0; i < 60; i++) {
+            let star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = star.style.height = Math.random()*2+'px';
+            star.style.left = Math.random()*100+'%';
+            star.style.top = Math.random()*100+'%';
+            galaxy.appendChild(star);
+        }
+
+        function checkPass() {
+            const pass = document.getElementById('passcode').value;
+            if(pass === "1504") {
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+                showNext(1);
+            } else {
+                alert("Incorrect Passcode! Hint: 1504 ❤️");
+            }
+        }
+
+        const startDate = new Date(2023, 3, 15); 
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((diff / (1000 * 60)) % 60);
+            const secs = Math.floor((diff / 1000) % 60);
+            document.getElementById('loveTimer').innerHTML = `<b>${days} Days</b><br><span style="font-size:18px">${hours}h : ${mins}m : ${secs}s</span>`;
+        }
+        setInterval(updateTimer, 1000);
+
+        function cutCake() {
+            confetti({ particleCount: 200, spread: 90 });
+            document.getElementById('cake').innerHTML = "🍰";
+            document.getElementById('cake-msg').innerHTML = "Make a wish! ❤️";
+            document.getElementById('nextToMenu').style.display = "block";
+            bgMusic.play();
+        }
+
+        function showNext(num) {
+            document.querySelectorAll('.container').forEach(c => {
+                c.classList.remove('active');
+                setTimeout(() => c.style.display = 'none', 300);
+            });
+            setTimeout(() => {
+                const next = document.getElementById('sec' + num);
+                next.style.display = 'block';
+                setTimeout(() => next.classList.add('active'), 10);
+                if(num === 4) typeMessage();
+            }, 350);
+        }
+
+        function toggleMusic() { bgMusic.paused ? bgMusic.play() : bgMusic.pause(); }
+        function playVoice() { voiceNote.play(); }
+
+        function typeMessage() {
+            const text = "Happy Birthday, Alishuuu mera bacha! ❤️🎂\n\nAaj tumhare birthday par mujhe wo saari purani baatein yaad aa rahi hain... Mujhe aaj bhi wo din achi tarah yaad hai jab tumne pehli baar mujhe bola tha ke tum committed ho 🗣️.\n\nSach bolun toh 17 Nov ka wo din mere liye bhot bura tha 💔. Lekin kisi ko kya pata tha ke sirf 6 months ke andar hamara bond itna haseen ban jayega! ✨\n\nAlishuuu, tum mere liye sabse khas tareen larki ho 💎. Mujhe bura lagta hai jab tum kisi bhi larke se baat karti ho—bhale wo Taha ho ya Ahmed 😒.\n\nBas jo bhi ho, tum meri bestie ho! ❤️\n\nKal Uni mein milte hain bhot bade surprise ke sath! 🎒🏫🎁\n\nHappy Birthday Jani! 🎂💖";
+            
+            let i = 0;
+            const box = document.getElementById('type-text');
+            box.innerHTML = "";
+            function typing() {
+                if (i < text.length) {
+                    if(text.charAt(i) === "\n") { box.innerHTML += "<br>"; }
+                    else { box.innerHTML += text.charAt(i); }
+                    i++;
+                    setTimeout(typing, 35);
+                }
+            }
+            typing();
+        }
+
+        function sayYes() {
+            document.getElementById('questionArea').style.display = 'none';
+            document.getElementById('yesResponse').style.display = 'block';
+            confetti({ particleCount: 300, spread: 100, origin: { y: 0.6 } });
+        }
+
+        function moveButton(btn) {
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+            btn.style.zIndex = '999';
+        }
+
+        setInterval(() => {
+            const h = document.createElement('div');
+            h.innerHTML = '❤️';
+            h.style.position = 'fixed';
+            h.style.left = Math.random()*100+'vw';
+            h.style.bottom = '-20px';
+            h.style.fontSize = Math.random()*15+10+'px';
+            h.style.opacity = '0.5';
+            h.style.animation = `floatUp ${Math.random()*2+4}s linear forwards`;
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 5000);
+        }, 800);
+    </script>
+
+    <style>
+        @keyframes floatUp { to { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
+    </style>
+</body>
+</html>
